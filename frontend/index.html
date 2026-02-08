@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta | Intelligent Growth Planner</title>
+    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="ui-improvements.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-brand">Delta</div>
+            <div class="nav-menu" id="navMenu">
+                <button class="nav-link" data-page="onboarding">Onboarding</button>
+                <button class="nav-link" data-page="roadmap">Roadmap</button>
+                <button class="nav-link" data-page="progress">Progress</button>
+                <button class="nav-link" data-page="profile">Profile</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Onboarding Page -->
+            <section id="onboarding-page" class="page active">
+                <div class="card">
+                    <h1>Welcome into Delta</h1>
+                    <p class="subtitle">Configure your professional growth trajectory</p>
+
+                    <form id="onboarding-form" class="multi-step-form">
+                        <!-- Progress Indicator -->
+                        <!-- Progress Indicator Removed -->
+
+                        <!-- Step 1: Academics -->
+                        <!-- Section: Academics -->
+                        <div class="form-section">
+                            <h3>Academic Profile</h3>
+                            <div class="form-group" style="text-align: center; margin-bottom: 2rem;">
+                                <div class="profile-upload-container">
+                                    <label for="profile-photo-input" class="profile-upload-label">
+                                        <div id="profile-preview" class="profile-preview-placeholder">
+                                            <span>Upload Photo</span>
+                                        </div>
+                                    </label>
+                                    <input type="file" id="profile-photo-input" accept="image/*" style="display: none;">
+                                    <input type="hidden" id="profile-photo-base64" name="profile_photo">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="major">Major / Field of Study</label>
+                                    <input type="text" id="major" name="major" placeholder="e.g., Computer Science"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="university">University / Institution</label>
+                                    <input type="text" id="university" name="university"
+                                        placeholder="e.g., Stanford University" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gpa">GPA (Optional)</label>
+                                <input type="number" id="gpa" name="gpa" step="0.01" min="0" max="4.0"
+                                    placeholder="0.00 - 4.00">
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Career Vision -->
+                        <!-- Section: Career Vision -->
+                        <div class="form-section">
+                            <h3>Career Vision</h3>
+                            <div class="form-group">
+                                <label for="career-aspirations">Career Aspirations</label>
+                                <textarea id="career-aspirations" name="career_aspirations" rows="3" required
+                                    placeholder="Describe your target role and long-term goals..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="target-industries">Target Industries</label>
+                                <input type="text" id="target-industries" name="target_industries"
+                                    placeholder="e.g., Fintech, AI, Healthcare" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Relocation Intent</label>
+                                    <div class="toggle-container">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="relocation-toggle">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <span id="relocation-status">No</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="relocation-input-group" style="display: none;">
+                                    <label for="relocation-goal">Target Location</label>
+                                    <input type="text" id="relocation-goal" name="relocation_goal"
+                                        placeholder="e.g., Berlin, Toronto">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="planning-horizon">Planning Horizon: <span id="horizon-value">1
+                                        Year</span></label>
+                                <input type="range" id="planning-horizon" name="planning_horizon_years" min="1" max="8"
+                                    value="1" step="1" style="width: 100%;">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
+                                    <span>1 Year</span>
+                                    <span>8 Years</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Skills & Experience -->
+                        <!-- Section: Skills & Experience -->
+                        <div class="form-section">
+                            <h3>Skills & Experience</h3>
+                            <div class="form-group">
+                                <label for="current-skills">Current Skills</label>
+                                <input type="text" id="current-skills" name="current_skills"
+                                    placeholder="e.g., Python, SQL" required>
+                                <small>Separate multiple skills with commas</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="experience-level">Experience Level</label>
+                                <select id="experience-level" name="experience_level">
+                                    <option value="beginner">Beginner</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="extracurriculars">Extracurricular Interests (Optional)</label>
+                                <textarea id="extracurriculars" name="extracurricular_interests" rows="2"
+                                    placeholder="e.g., Debate, Music, Volunteering..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Learning Preferences -->
+                        <!-- Section: Learning Preferences -->
+                        <div class="form-section">
+                            <h3>Learning Preferences</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="learning-style">Preferred Learning Style</label>
+                                    <select id="learning-style" name="preferred_learning" required>
+                                        <option value="">Select...</option>
+                                        <option value="visual">Visual</option>
+                                        <option value="hands-on">Hands-on</option>
+                                        <option value="reading">Reading</option>
+                                        <option value="mixed">Mixed</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="time-commitment">Weekly Time Commitment</label>
+                                    <select id="time-commitment" name="time_commitment" required>
+                                        <option value="">Select...</option>
+                                        <option value="5-10 hours">5-10 hours/week</option>
+                                        <option value="10-15 hours">10-15 hours/week</option>
+                                        <option value="15-20 hours">15-20 hours/week</option>
+                                        <option value="20+ hours">20+ hours/week</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="content-types">Preferred Content Types (Optional)</label>
+                                <input type="text" id="content-types" name="preferred_content_types"
+                                    placeholder="e.g., Video, Documentation, Books">
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="form-navigation">
+                            <button type="submit" class="btn btn-primary" id="submit-btn" style="width: 100%;">Generate
+                                Path</button>
+                        </div>
+                    </form>
+
+                    <div id="onboarding-status" class="status-message"></div>
+                </div>
+            </section>
+
+            <!-- Roadmap Page - Interactive Assistant -->
+            <section id="roadmap-page" class="page">
+                <div class="card">
+                    <div class="page-header">
+                        <h1>Your Trajectory</h1>
+                        <div class="header-actions">
+                            <button class="btn btn-secondary" id="regenerate-month">Regenerate Month</button>
+                        </div>
+                    </div>
+
+                    <!-- Current Month Focus -->
+                    <div id="current-month-focus" class="current-month-section">
+                        <div class="month-header">
+                            <h2><span id="month-title">Month 1</span></h2>
+                            <span id="month-focus" class="month-focus-text">Loading...</span>
+                        </div>
+
+                        <div id="month-motivation" class="motivation-banner"></div>
+
+                        <div id="current-tasks-list" class="current-tasks">
+                            <p class="empty-state">Loading your tasks...</p>
+                        </div>
+
+                        <div class="month-progress">
+                            <div class="progress-info">
+                                <span id="tasks-completed">0</span> of <span id="tasks-total">0</span> tasks completed
+                            </div>
+                            <div class="progress-bar"
+                                style="background: #eee; height: 4px; border-radius: 2px; margin-top:0.5rem; overflow:hidden;">
+                                <div id="month-progress-fill" class="progress-fill"
+                                    style="width: 0%; height: 100%; background: var(--text-primary);"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Assistant Chat -->
+                    <div class="assistant-section">
+                        <h3>Delta Assistant</h3>
+                        <div id="assistant-messages" class="assistant-messages">
+                            <div class="assistant-message">
+                                <div class="message-content">
+                                    I am ready to assist with your educational planning. How may I help you adjust your
+                                    schedule?
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="assistant-input-area">
+                            <input type="text" id="assistant-input" placeholder="Type your request here..." />
+                            <button class="btn btn-primary" id="send-message">Send</button>
+                        </div>
+
+                        <div class="quick-actions">
+                            <button class="quick-action-btn" data-action="more-projects">More Projects</button>
+                            <button class="quick-action-btn" data-action="more-courses">More Courses</button>
+                            <button class="quick-action-btn" data-action="slower-pace">Slower Pace</button>
+                            <button class="quick-action-btn" data-action="faster-pace">Faster Pace</button>
+                        </div>
+
+                        <div id="current-preferences" class="preferences-display"
+                            style="margin-top: 1rem; color: var(--text-secondary);">
+                            <span>Current Plan: <span id="pref-projects" style="color: var(--text-primary);">50%</span>
+                                projects | Pace: <span id="pref-pace"
+                                    style="color: var(--text-primary);">moderate</span></span>
+                        </div>
+                    </div>
+
+                    <!-- View Full Roadmap Link -->
+                    <div class="full-roadmap-toggle">
+                        <button class="btn btn-secondary" id="toggle-full-roadmap">View Full Timeline</button>
+                    </div>
+
+                    <div id="roadmap-content" class="roadmap-container" style="display: none;">
+                        <p class="empty-state">Complete onboarding to generate your roadmap</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Page -->
+            <section id="progress-page" class="page">
+                <div class="card">
+                    <h1>Performance Tracking</h1>
+
+                    <div id="progress-summary" class="progress-summary"></div>
+
+                    <div class="progress-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="course">Courses</button>
+                        <button class="filter-btn" data-filter="project">Projects</button>
+                        <button class="filter-btn" data-filter="certificate">Certificates</button>
+                        <button class="filter-btn" data-filter="internship">Internships</button>
+                        <button class="filter-btn" data-filter="test">Tests</button>
+                    </div>
+
+                    <div id="progress-tasks" class="tasks-container"></div>
+                </div>
+            </section>
+
+            <!-- Profile Builder Page -->
+            <section id="profile-page" class="page">
+                <div class="card">
+                    <div class="page-header">
+                        <h1>Professional Profile</h1>
+                        <button class="btn btn-secondary" id="refresh-profile">
+                            Refresh Data
+                        </button>
+                    </div>
+
+                    <div class="profile-tabs">
+                        <button class="tab-btn active" data-tab="resume">Resume</button>
+                        <button class="tab-btn" data-tab="linkedin">LinkedIn</button>
+                    </div>
+
+                    <!-- Resume Tab -->
+                    <div id="resume-tab" class="tab-content active">
+                        <!-- Personal Details Editor -->
+                        <div class="resume-editor-card" style="border:none; padding-left:0; box-shadow:none;">
+                            <h3>Contact Details</h3>
+                            <form id="resume-details-form" class="form-row">
+                                <div class="form-group">
+                                    <label for="res-phone">Phone</label>
+                                    <input type="text" id="res-phone" placeholder="+1 (555) 123-4567">
+                                </div>
+                                <div class="form-group">
+                                    <label for="res-linkedin">LinkedIn URL</label>
+                                    <input type="text" id="res-linkedin" placeholder="linkedin.com/in/username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="res-github">GitHub URL</label>
+                                    <input type="text" id="res-github" placeholder="github.com/username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="res-portfolio">Portfolio</label>
+                                    <input type="text" id="res-portfolio" placeholder="yourwebsite.com">
+                                </div>
+                                <div class="form-group" style="display: flex; align-items: flex-end;">
+                                    <button type="submit" class="btn btn-secondary" style="width: 100%;">Save
+                                        Details</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="resume-section">
+                            <h2>Draft Resume</h2>
+                            <div id="resume-content" class="resume-display">
+                                <p class="empty-state">Complete tasks to populate resume data.</p>
+                            </div>
+                            <button class="btn btn-primary" id="download-resume">
+                                Download JSON
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Tab -->
+                    <div id="linkedin-tab" class="tab-content">
+                        <div class="linkedin-section">
+                            <h2>LinkedIn Content</h2>
+                            <div id="linkedin-content" class="linkedin-display">
+                                <p class="empty-state">Generate content suggestions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
