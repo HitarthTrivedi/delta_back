@@ -1107,6 +1107,16 @@ def simulate_trends():
     }), 201
 
 
+@app.route('/', methods=['GET'])
+def root():
+    """Root endpoint to verify backend is running"""
+    return jsonify({
+        'message': 'Delta Backend API is running',
+        'status': 'active',
+        'version': '1.0.0'
+    }), 200
+
+
 # ============================================================================
 # INITIALIZE DATABASE
 # ============================================================================
