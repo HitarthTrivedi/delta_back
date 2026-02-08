@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from models import db, User, StudentProfile, GrowthPath, ProgressTracker, ProfessionalProfile, SimulatedTrend, RoadmapConversation, UserPreferences
 from gemini_service import GeminiService, RoadmapAssistant
@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend', static_url_path='/')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///student_planner.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
@@ -1107,14 +1107,10 @@ def simulate_trends():
     }), 201
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def root():
-    """Root endpoint to verify backend is running"""
-    return jsonify({
-        'message': 'Delta Backend API is running',
-        'status': 'active',
-        'version': '1.0.0'
-    }), 200
+    """Serve the frontend application"""
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 # ============================================================================
